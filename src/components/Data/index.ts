@@ -1,5 +1,6 @@
+import { ICategories } from './../interfaces/index';
 import { v4 as uuid } from "uuid";
-import { IFormInput, IProducts } from "../interfaces";
+import {IFormInput, IProducts } from "../interfaces";
 
 export const ProductsList: IProducts[] = [
   {
@@ -23,14 +24,14 @@ export const ProductsList: IProducts[] = [
       "#84D2C5",
     ],
     category: {
-      name: "Cars",
-      imageURL:
-        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Porsche",
+      imgURL:
+        "https://images.pexels.com/photos/18412480/pexels-photo-18412480/free-photo-of-taycan.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
   },
   {
     id: uuid(),
-    title: "Chevrolet Spark. 995cc Pe...",
+    title: "Chevrolet Spark. 995cc Pe...",                                  
     description:
       "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo voluptas doloribus numquam id dignissimos cumque magni, molestias itaque natus voluptatum",
     imageURL:
@@ -38,9 +39,9 @@ export const ProductsList: IProducts[] = [
     price: "$120,000",
     colors: ["#FF0032", "#2563eb", "#FF6E31"],
     category: {
-      name: "Cars",
-      imageURL:
-        "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      name: "BMW",
+      imgURL:
+        "https://images.pexels.com/photos/100653/pexels-photo-100653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
   },
   {
@@ -53,9 +54,9 @@ export const ProductsList: IProducts[] = [
     price: "$200,000",
     colors: ["#A31ACB", "#3C2A21", "#1F8A70", "#820000", "#FF0032"],
     category: {
-      name: "Cars",
-      imageURL:
-        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2783&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      name: "Chevrolet",
+      imgURL:
+        " https://images.pexels.com/photos/583153/pexels-photo-583153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     },
   },
   {
@@ -79,8 +80,8 @@ export const ProductsList: IProducts[] = [
       "#84D2C5",
     ],
     category: {
-      name: "Cars",
-      imageURL:
+      name: "Porsche",
+      imgURL:
         "https://images.unsplash.com/photo-1534096331554-af5d8b510bbf?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   },
@@ -95,7 +96,7 @@ export const ProductsList: IProducts[] = [
     colors: ["rgb(220 38 38)", "rgb(79 70 229)", "rgb(202 138 4)"],
     category: {
       name: "Cars",
-      imageURL:
+      imgURL:
         "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   },
@@ -110,7 +111,7 @@ export const ProductsList: IProducts[] = [
     colors: ["#A31ACB", "#3C2A21", "#1F8A70", "#820000", "#FF0032"],
     category: {
       name: "Cars",
-      imageURL:
+      imgURL:
         "https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   },
@@ -151,4 +152,31 @@ export const Colors: string[] = [
   "#F7DC6F",
   "#17202A",
   "#808B96",
+];
+
+export const categories:ICategories[] = [
+  {
+    id: uuid(),
+    name: "Bmw",
+    imgURL:
+      "https://images.pexels.com/photos/100653/pexels-photo-100653.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    id: uuid(),
+    name: "Porsche ",
+    imgURL:
+      "https://images.pexels.com/photos/18412480/pexels-photo-18412480/free-photo-of-taycan.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    id: uuid(),
+    name: "Chevrolet",
+    imgURL:
+      " https://images.pexels.com/photos/583153/pexels-photo-583153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
+  {
+    id: uuid(),
+    name: "Ferrari",
+    imgURL:
+      "https://images.pexels.com/photos/2922140/pexels-photo-2922140.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  },
 ];

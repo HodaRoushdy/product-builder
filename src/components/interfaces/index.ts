@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface IProducts {
-  id?: string | undefined;
+  id: string | undefined;
   title: string;
   description: string;
   imageURL: string;
@@ -9,7 +9,7 @@ export interface IProducts {
   colors: string[];
   category: {
     name: string;
-    imageURL: string;
+    imgURL: string;
   };
 }
 
@@ -36,4 +36,10 @@ export interface IValidationProduct {
   description: string;
   imageURL: string;
   price: string;
+}
+
+export interface ICategories{
+  id: string,
+  name: string,
+  imgURL : string
 }
