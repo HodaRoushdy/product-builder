@@ -3,11 +3,11 @@ import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 import { categories } from "../Data";
 import { ICategories } from "../interfaces";
+
 interface IProps {
-  selected: ICategories;
+  selected: { name: string; imgURL: string };
   setSelected: (category: ICategories) => void;
 } 
-
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

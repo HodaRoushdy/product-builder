@@ -10,7 +10,7 @@ width?:widthType;
 }
 const Button =({children,className,width="w-full",...rest}:IProps)=>{
     return(
-        <button className={`${className} ${width} rounded-md p-2 text-white cursor-pointer duration-200`} {...rest} >{children}</button>
+        <button className={`${className} ${width} rounded-md p-2 text-white cursor-pointer duration-200 font-light`} {...rest} >{children}</button>
     )
 }
 export default Button

@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { v4 as uuid } from "uuid";
 import "./App.css";
 import Button from "./components/Button";
@@ -39,16 +40,14 @@ function App() {
 
   const [products, setProducts] = useState<IProducts[]>(ProductsList);
 
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
   const closeEditModal = () => setIsOpenEditModal(false);
   const openEditModal = () => setIsOpenEditModal(true);
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+  const closeRemoveModal = () => setIsOpenRemoveModal(false);
+  const [isOpenRemoveModal, setIsOpenRemoveModal] = useState(false);
+  const openRemoveModal = () => setIsOpenRemoveModal(true);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -139,6 +138,12 @@ function App() {
     setProduct(defaultProduct);
     setTempColor([]);
     closeEditModal();
+    toast("product added successfully", {
+      style: {
+        backgroundColor: "black",
+        color: "white",
+      },
+    });
   }
 
   const submitEditHandler = (event: FormEvent<HTMLFormElement>): void => {
@@ -157,17 +162,36 @@ function App() {
       setErrors(errors);
     }
     const updatedProducts = [...products];
-    updatedProducts[productToEditIdx] = {...productToEdit,colors: tempColors.concat(productToEdit.colors)}
+    updatedProducts[productToEditIdx] = {
+      ...productToEdit,
+      colors: tempColors.concat(productToEdit.colors),
+    };
     setProducts(updatedProducts);
 
     setProductToEdit(defaultProduct);
     setTempColor([]);
     closeEditModal();
+    toast("product has been updated successfully", {
+      style: {
+        backgroundColor: "black",
+        color: "white",
+      },
+    });
   };
 
-  const onCancelHandler = (): void => {
-    setProduct(defaultProduct);
-    closeModal();
+
+  const removeHandler = () => {
+    const filtered = products.filter(
+      (product) => product.id !== productToEdit.id
+    );
+    setProducts(filtered);
+    closeRemoveModal();
+    toast("product has been deleted successfully", {
+      style: {
+        backgroundColor: "black",
+        color: "white",
+      },
+    });
   };
 
   const renderProducts = products.map((product, idx) => (
@@ -176,6 +200,7 @@ function App() {
       key={product.id}
       product={product}
       openEditModal={openEditModal}
+      openRemoveModal={openRemoveModal}
       setProductToEdit={setProductToEdit}
       setproductToEditIdx={setproductToEditIdx}
     />
@@ -184,10 +209,10 @@ function App() {
   return (
     <main className="container p-5">
       <Button
-        className="bg-indigo-700 hover:bg-indigo-800 mb-4"
+        className="bg-indigo-700 hover:bg-indigo-800 mb-4 "
         width="w-fit"
         onClick={openModal}>
-        Add
+        Add a product
       </Button>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4">
         {renderProducts}
@@ -221,8 +246,9 @@ function App() {
             </Button>
 
             <Button
-              className="bg-gray-400 hover:bg-gray-500"
-              onClick={onCancelHandler}>
+              type="button"
+              className="bg-gray-300 hover:bg-gray-400"
+              onClick={closeModal}>
               Cancel
             </Button>
           </div>
@@ -267,9 +293,12 @@ function App() {
           </div>
 
           <SelectMenu
-            selected={selectedCategory}
-            setSelected={setSelectedCategory}
+            selected={productToEdit.category}
+            setSelected={(value) =>
+              setProductToEdit({ ...productToEdit, category: value })
+            }
           />
+
           <div className="flex items-center space-x-2 my-3">{renderColors}</div>
           <div className="flex items-center flex-wrap space-x-2 my-3">
             {tempColors.concat(productToEdit.colors).map((color) => (
@@ -288,13 +317,43 @@ function App() {
             </Button>
 
             <Button
+              type="button"
               className="bg-gray-400 hover:bg-gray-500"
-              onClick={onCancelHandler}>
+              onClick={closeEditModal}>
               Cancel
             </Button>
           </div>
         </form>
       </MyModal>
+
+      <MyModal
+        title="Are you sure you want to remove this product from your store ?"
+        closeModal={closeRemoveModal}
+        isOpen={isOpenRemoveModal}>
+        <div className="space-y-5">
+          <p>
+            Deleting this product will remove it permanently from your
+            inventory. Any associated data, sales history, and other related
+            information will also be deleted. Please make sure this is the
+            intended action.
+          </p>
+          <div className="space-x-1 flex">
+            <Button
+              className="bg-red-500 hover:bg-red-700"
+              onClick={removeHandler}>
+              Yes, remove
+            </Button>
+            <Button
+              type="button"
+              className="bg-gray-400 hover:bg-gray-700"
+              onClick={closeRemoveModal}>
+              cancel
+            </Button>
+          </div>
+        </div>
+      </MyModal>
+
+      <Toaster />
     </main>
   );
 }
