@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { v4 as uuid } from "uuid";
 import "./App.css";
@@ -39,39 +39,37 @@ function App() {
   });
 
   const [products, setProducts] = useState<IProducts[]>(ProductsList);
-
+  
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
   const closeEditModal = () => setIsOpenEditModal(false);
-  const openEditModal = () => setIsOpenEditModal(true);
+  const openEditModal = useCallback(()=> setIsOpenEditModal(true) ,[])
   const [isOpenEditModal, setIsOpenEditModal] = useState(false);
   const closeRemoveModal = () => setIsOpenRemoveModal(false);
   const [isOpenRemoveModal, setIsOpenRemoveModal] = useState(false);
-  const openRemoveModal = () => setIsOpenRemoveModal(true);
+  const openRemoveModal = useCallback(() => setIsOpenRemoveModal(true), []);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [isOpen, setIsOpen] = useState(false);
-
   const [product, setProduct] = useState<IProducts>(defaultProduct);
 
-  const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
+  const onChangeHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value, name } = event.target;
+      setProduct((prev) => ({...prev,[name]:value}));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    },[]
+  );
 
-    setProduct({ ...product, [name]: value });
-
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  };
-
-  const onChangeEditHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
-    setProductToEdit({ ...productToEdit, [name]: value });
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  };
+  const onChangeEditHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { value, name } = event.target;
+      setProductToEdit((prev) => ({ ...prev, [name]: value }));
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+  ,[]);
 
   const [tempColors, setTempColor] = useState<string[]>([]);
 

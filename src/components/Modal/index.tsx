@@ -1,12 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import { IModal } from '../interfaces';
 
-
-
-
-
-export default function MyModal({ title, isOpen, closeModal ,children }: IModal) {
+const MyModal = ({ title, isOpen, closeModal ,children }: IModal)=> {
 
     return (
       <>
@@ -57,3 +53,4 @@ export default function MyModal({ title, isOpen, closeModal ,children }: IModal)
     );
 }
 
+export default memo(MyModal);

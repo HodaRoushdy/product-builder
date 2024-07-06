@@ -1,11 +1,9 @@
+import { memo, useState } from "react";
 import Button from "../Button";
-import { txtSlicer } from "../Utils";
-
-import Image from "../Image";
-import { IProducts } from "../interfaces";
 import CircleColor from "../CircleColor";
-
-import { useState } from "react";
+import Image from "../Image";
+import { txtSlicer } from "../Utils";
+import { IProducts } from "../interfaces";
 
 interface Iprops {
   product: IProducts;
@@ -13,7 +11,7 @@ interface Iprops {
   setProductToEdit: (product: IProducts) => void;
   idx: number;
   setproductToEditIdx: (value: number) => void;
-  openRemoveModal: ()=>void
+  openRemoveModal: () => void;
 }
 
 const Product = ({
@@ -83,4 +81,4 @@ const Product = ({
     </div>
   );
 };
-export default Product;
+export default memo(Product);

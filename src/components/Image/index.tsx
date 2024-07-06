@@ -1,3 +1,5 @@
+import { memo } from "react"
+
 interface IProps{
 url:string ,
 alt:string,
@@ -8,4 +10,4 @@ const Image =({url,alt,className}:IProps)=>{
         <img className={className} src={url} alt={alt} />
     )
 }
-export default Image
+export default memo(Image);
